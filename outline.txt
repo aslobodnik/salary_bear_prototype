@@ -1,0 +1,8 @@
+1. Load csv into memory
+2. Create homepage
+    a. has search box
+    b. returns results from csv under /search
+3. Each person has profile page
+    a. url structure 
+    b. @app.route('/<state>/<organization>/<name>-<int:person_id>')
+    c. has description of what they do plus the guy who he makes more of and the guy he makes less off

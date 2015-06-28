@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <title>Salary Bear</title>
+    </head>
+    <body>
+        <p>hi</p>
+        <p>{{person.first_name}}</p>
+        <form method="post" action="{{ url_for('search') }}">
+            <label search_box="search">search:</label>
+            <input type="text" name="search_box"/><br/>
+            <input type="submit"/>
+        </form>
+    </body>
+</html>
