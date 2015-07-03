@@ -5,7 +5,7 @@
     </head>
     <body>
         <p>hi</p>
-        <p>{{person.first_name}}</p>
+        <p>{{person.full_name}}</p>
         <form method="post" action="{{ url_for('search') }}">
             <label search_box="search">search:</label>
             <input type="text" name="search_box"/><br/>

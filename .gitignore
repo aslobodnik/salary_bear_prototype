@@ -6,7 +6,7 @@ __pycache__/
 # C extensions
 *.so
 #Flask
-.app.py.swp
+*.swp
 # Distribution / packaging
 .Python
 venv/
