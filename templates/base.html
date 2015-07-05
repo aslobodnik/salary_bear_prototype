@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+      <title>{% block head %}{% endblock %}</title>
+		<!-- Bootstrap core CSS -->
+      <link href="{{ url_for('static', filename='bootstrap-3.3.5/css/bootstrap.css') }}" rel="stylesheet" />
+      <!-- Custom styles for this template -->
+      <link href="{{ url_for('static', filename='bootstrap-3.3.5/css/starter-template.css') }}" rel="stylesheet" />
+   </head>
+   <body>
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+         <div class="container">
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" href="/">Salary Bear</a>
+            </div>
+            <div class="collapse navbar-collapse">
+               <ul class="nav navbar-nav">
+                  <li class="{{search_nav}}"><a href="/">Search</a></li>
+                  <li class="{{departments_nav}}"><a href="/departments">About</a></li>
+                  <li class="{{job_titles_nav}}"><a href="/job-titles">Sister Site</a></li>
+               </ul>
+            </div>
+            <!--/.nav-collapse -->
+         </div>
+      </div>
+      <div class="container">
+         {% block body %}{% endblock %}
+         <footer class="row">
+            <hr>
+            <div class="text-center">
+                <p>&copy 2015 Salary Bear</p>
+            </div>
+            <hr>
+         </footer>
+      </div>
+      <!-- /.container -->
+      <!-- Bootstrap core JavaScript
+         ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script src="{{ url_for('static', filename='bootstrap-3.3.5/js/bootstrap.min.js') }}"></script>
+   </body>
+</html>
