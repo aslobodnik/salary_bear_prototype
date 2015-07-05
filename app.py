@@ -32,6 +32,8 @@ def create_person(df_row):
     person['state'] = df_row.state
     person['full_name'] = df_row['first_name'] + ' ' + df_row['middle_name'] +\
             ' ' + df_row['last_name']
+    person['person_id'] = df_row['id']
+    person['url'] = generate_url(df_row['id'])
     return person
 
 def create_people(df):

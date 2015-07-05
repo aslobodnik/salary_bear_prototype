@@ -32,7 +32,7 @@
                 <tbody>
                     {% for person in people %}
                         <tr>
-                            <td align="left">{{person.full_name | title}}</td>
+                            <td align="left"><a href="{{person.url}}">{{person.full_name | title}}</a></td>
                             <td align="left">{{person.title | title}}</td>
                             <td align="left">{{person.salary}}</td>
                         </tr> 

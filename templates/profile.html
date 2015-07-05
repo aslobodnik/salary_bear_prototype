@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="eng">
-    <head>
-        <title>{{person.first_name}} {{person.middle_name}} {{person.last_name}} Salary</title>
-    </head>
-    <body>
-        <h1>{{person.first_name}} {{person.middle_name}} {{person.last_name}} Salary: {{person.salary}}</h1>
-        <a href="{{url}}">{{person.first_name}}</a>
-    </body>
-</html>
+{% extends "base.html" %}
+{% block head %}{{person.first_name | title}} {{person.middle_name | title}} {{person.last_name | title}}{% endblock %}
+{% block body %}
+<div class="starter-template">
+    <h1>{{person.first_name | title}} {{person.middle_name | title}} {{person.last_name | title}}</h1>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <p>A long time ago {{person.first_name | title}} {{person.last_name | title}} was born. When you ask? Well someone knows. But Salary Bear does not :-( What I do know is that {{person.first_name | title}} makes {{person.salary}}, resides in {{person.state}} and works as {{person.title | title}}. Salary Bear wishes only the best.</p>
+        </div>
+    </div><!-- /row -->
+</div><!-- /starter-template -->        
+{% endblock %}        
