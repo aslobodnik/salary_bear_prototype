@@ -1,8 +1,15 @@
 1. Load csv into memory
-2. Create homepage
-    a. has search box
-    b. returns results from csv under /search
-3. Each person has profile page
-    a. url structure 
-    b. @app.route('/<state>/<organization>/<name>-<int:person_id>')
-    c. has description of what they do plus the guy who he makes more of and the guy he makes less off
+2. Create homepage[COMPLETE]
+    a. has search box[COMPLETE]
+    b. returns results from csv under /search[COMPLETE]
+3. Each person has profile page[COMPLETE]
+    a. url structure [COMPLETE]
+    b. @app.route('/<state>/<organization>/<name>-<int:person_id>')[COMPLETE]
+    c. has description of what they do plus the guy who he makes more of and the guy he makes less off [PUNTED to below]
+[Items Needed to Launch]
+1. schema.org
+2. proper grammar for description
+3. pagination for results [complete]
+4. other people in one's deparment on profile page
+5. Remove top Nav and make colors better visible[complete]
+6. Test that it works with large file size

@@ -1,0 +1,39 @@
+{% macro render_pagination(pagination) %}
+	<div class=pagination>
+        <ul class="pagination">
+		{% if pagination.total_count > 10 %}
+			{% if pagination.has_prev %}
+                <li><a href="{{ url_for_other_page(pagination.page - 1)}}"><span class="glyphicon glyphicon-chevron-left"></span>Previous</a></li>
+			{% endif %}
+			{% for page in pagination.iter_pages() %}
+	    		{% if page %}
+	      			{% if page != pagination.page %}
+                        <li><a href="{{ url_for_other_page(page) }}">{{ page }}</a></li>
+	      			{% else %}
+                    <li class="active"><a href="{{ url_for_other_page(pagination.page)}}"><strong>{{ page }}</strong></a></li>
+	      			{% endif %}
+	    		{% else %}
+                    <li><span class=ellipsis>…</span><li>
+	    		{% endif %}
+			{% endfor %}
+	 		{% if pagination.has_next %}
+                 <li><a href="{{ url_for_other_page(pagination.page + 1)}}">Next<span class="glyphicon glyphicon-chevron-right"></span></a><li>
+	  		{% endif %}
+        {% endif %}
+        </ul>
+	</div>
+{% endmacro %}
+
+{% macro render_search() %}
+<form action="{{url_for('search')}}">
+     <div class="input-group input-group-lg">
+         <input type="text" class="form-control" name="q" placeholder="search salary bear"/>
+         <span class="input-group-btn">
+             <button class="btn btn-default" type="submit"/>
+                 <span class="glyphicon glyphicon-search"></span>
+             </button>
+         </span>
+     </div>
+ </form>
+{% endmacro %}
+ 

@@ -1,8 +1,19 @@
 from flask import Flask, render_template,request, url_for
 import pandas as pd
 from slugify import slugify
+from pagination import *
 
 app = Flask(__name__)
+
+def url_for_other_page(page):
+    args = request.view_args.copy()
+    args['page'] = page
+    args['q'] = request.args.get('q')
+    return url_for(request.endpoint, **args)
+
+app.jinja_env.globals['url_for_other_page'] = url_for_other_page #pagination macro
+#Global Defaults
+PER_PAGE = 5
 
 df = pd.DataFrame.from_csv('data.csv')
 df.columns = ['organization'
@@ -49,17 +60,25 @@ def home():
 
 @app.route('/<state>/<organization>/<name>-<int:person_id>')
 def profile(state,organization,name,person_id):
-    person = df.iloc[person_id]
-    url = generate_url(person_id)
-    return render_template('profile.html',person=person, url=url)
+    person = create_person(df.iloc[person_id])
+    return render_template('profile.html',person=person)
 
-@app.route('/search/', methods=['POST'])
-def search():
-    search_text = request.form['search_box']
+
+@app.route('/search', defaults={'page': 1})
+@app.route('/search/page/<int:page>')
+def search(page):
+    search_text = request.args.get('q')
     search_results = search_by_name(search_text)
     people = create_people(search_results)
-    return render_template('search_results.html', people=people,
-            search_text=search_text)
+    if people:
+        result_pages = [people[x:x+PER_PAGE] for x in range(0,len(people),PER_PAGE)]
+        result_page = result_pages[page - 1]
+    else:
+        result_page = []
+    pagination = Pagination(page, PER_PAGE, len(people))
+    return render_template('search_results.html', people=result_page,
+            pagination=pagination,results=len(people), search_text=search_text)
+
 
 def search_by_name(search_string):
     search_string = search_string.upper().split()
