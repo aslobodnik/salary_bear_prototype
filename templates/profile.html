@@ -5,9 +5,9 @@
     <h1>{{person.first_name | title}} {{person.middle_name | title}} {{person.last_name | title}}</h1>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <p class="lead" align="left">A long time ago {{person.first_name | title}} {{person.last_name | title}} was born. When you ask? Well someone knows. But Salary Bear does not :-( What I do know is that {{person.first_name | title}} makes {{person.salary}}, resides in {{person.state}} and works as {{person.title | title}}.</p>
+            <p class="lead" align="left">A long time ago <a href="{{person.url}}">{{person.first_name | title}} {{person.last_name | title}}</a> was born. When you ask? Well someone knows. But Salary Bear does not :-( What I do know is that {{person.first_name | title}} makes ${{person.salary | int | commas}}, resides in {{person.state}} and works as {{person.title | title}}.</p>
             <p>Salary Bear wishes only the best.</p>
-            <p class="lead" align="left"> Salary Bear wonders how {{person.first_name | title}} feels about PERSONNAME who makes X and PERSONNAME who makes Y, yet work in the same deparment.<p>
+            <p class="lead" align="left"> Salary Bear wonders how {{person.first_name | title}} feels about <a href="{{high.url}}">{{high.first_name | title}} {{high.last_name | title}}</a> who makes ${{high.salary | int | commas}} and <a href="{{low.url}}">{{low.first_name | title}} {{low.last_name | title}}</a> who makes ${{low.salary | int | commas}}, yet work in the same deparment.<p>
         </div>
     </div><!-- /row -->
 </div><!-- /starter-template -->        

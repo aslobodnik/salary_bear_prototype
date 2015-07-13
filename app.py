@@ -2,6 +2,8 @@ from flask import Flask, render_template,request, url_for
 import pandas as pd
 from slugify import slugify
 from pagination import *
+from re import sub
+from decimal import Decimal
 
 app = Flask(__name__)
 
@@ -13,7 +15,7 @@ def url_for_other_page(page):
 
 app.jinja_env.globals['url_for_other_page'] = url_for_other_page #pagination macro
 #Global Defaults
-PER_PAGE = 5
+PER_PAGE = 10
 
 df = pd.DataFrame.from_csv('data.csv')
 df.columns = ['organization'
@@ -30,6 +32,15 @@ df['full_name'] = df['first_name'] + ' ' + df['middle_name'] + ' '\
 
 df['id'] = df.index
 
+#data cleaning
+#df = df[~df['title'].isnull()]
+df['salary'] = df['salary'].fillna('$0.00')
+df['salary'] = df['salary'].apply(lambda x: Decimal(sub(r'[^\d.]','',x)))
+
+
+@app.template_filter('commas')
+def commas(s):
+    return '{:,.0f}'.format(s)
 
 def create_person(df_row):
     person = {}
@@ -61,7 +72,8 @@ def home():
 @app.route('/<state>/<organization>/<name>-<int:person_id>')
 def profile(state,organization,name,person_id):
     person = create_person(df.iloc[person_id])
-    return render_template('profile.html',person=person)
+    high,low = find_others(person_id)
+    return render_template('profile.html',person=person,high=high,low=low)
 
 
 @app.route('/search', defaults={'page': 1})
@@ -71,7 +83,8 @@ def search(page):
     search_results = search_by_name(search_text)
     people = create_people(search_results)
     if people:
-        result_pages = [people[x:x+PER_PAGE] for x in range(0,len(people),PER_PAGE)]
+        result_pages = [people[x:x+PER_PAGE] for x in range(0,len(people)
+            ,PER_PAGE)]
         result_page = result_pages[page - 1]
     else:
         result_page = []
@@ -94,6 +107,28 @@ def generate_url(person_id):
     url += slugify(person.full_name) + '-'
     url += str(person_id)
     return url
+
+def find_others(person_id):
+    person = df.iloc[person_id]
+    coworkers = df[df.department == person.department]
+    coworkers = coworkers[coworkers.id != person_id]
+    coworkers.sort('salary',inplace=True)
+    highest_salary = coworkers.iloc[-1] 
+    lowest_salary = coworkers.iloc[0] 
+    
+    highest_salary_flg = False
+    lowest_salary_flg = True
+
+    if highest_salary['salary'] == person['salary']:
+        highest_salary_flg = True
+    elif lowest_salary['salary']== person['salary']:
+        lowest_salary_flg = True
+    else:
+        high_coworker = coworkers[coworkers['salary'] > person['salary']].sort('salary').iloc[0] 
+        low_coworker = coworkers[coworkers['salary'] < person['salary']].sort('salary').iloc[-1] 
+    
+    return create_person(high_coworker),create_person(low_coworker)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

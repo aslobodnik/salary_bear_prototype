@@ -9,7 +9,9 @@
 [Items Needed to Launch]
 1. schema.org
 2. proper grammar for description
-3. pagination for results [complete]
+3. pagination for results [COMPLETE]
 4. other people in one's deparment on profile page
-5. Remove top Nav and make colors better visible[complete]
+5. Remove top Nav and make colors better visible[COMPLETE]
 6. Test that it works with large file size
+7. Clean up salary to be rounded [COMPLETE]
+8. Clean up data to avoid all poeple with no salary
