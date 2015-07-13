@@ -10,7 +10,8 @@
 1. schema.org
 2. proper grammar for description
 3. pagination for results [COMPLETE]
-4. other people in one's deparment on profile page
+4. other people in one's deparment on profile page [COMPLETE]
+    a. handle special case of being lowest/highest salary
 5. Remove top Nav and make colors better visible[COMPLETE]
 6. Test that it works with large file size
 7. Clean up salary to be rounded [COMPLETE]
