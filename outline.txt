@@ -16,3 +16,4 @@
 6. Test that it works with large file size
 7. Clean up salary to be rounded [COMPLETE]
 8. Clean up data to avoid all poeple with no salary
+9. Use branching to add features
