@@ -5,9 +5,10 @@
     <h1>{{person.first_name | title}} {{person.middle_name | title}} {{person.last_name | title}}</h1>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <p class="lead" align="left">A long time ago <a href="{{person.url}}">{{person.first_name | title}} {{person.last_name | title}}</a> was born. When you ask? Well someone knows. But Salary Bear does not :-( What I do know is that {{person.first_name | title}} makes ${{person.salary | int | commas}}, resides in {{person.state}} and works as {{person.title | title}}.</p>
-            <p>Salary Bear wishes only the best.</p>
-            <p class="lead" align="left"> Salary Bear wonders how {{person.first_name | title}} feels about <a href="{{high.url}}">{{high.first_name | title}} {{high.last_name | title}}</a> who makes ${{high.salary | int | commas}} and <a href="{{low.url}}">{{low.first_name | title}} {{low.last_name | title}}</a> who makes ${{low.salary | int | commas}}, yet work in the same deparment.<p>
+            <div itemscope itemtype="http://schema.org/Person">
+                <p class="lead" align="left">A long time ago <a href="{{person.url}}"><span itemprop="name"><span itemprop="givenName">{{person.first_name | title}}</span> <span itemprop="familyName">{{person.last_name | title}}</span></a> was born. When you ask? Well someone knows. But Salary Bear does not :-( What I do know is that {{person.first_name | title}} makes ${{person.salary | int | commas}}, resides in <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span itemprop="addressRegion">{{person.state}}</span></span> and works as <span itemprop="jobTitle">{{person.title | title}}</span>. Salary Bear isn't sure how long {{person.first_name | title}} has worked for <span itemprop="worksFor">{{person.organization}}</span>.</p></span>
+            </div>
+            <p class="lead" align="left"> Salary Bear wonders how {{person.first_name | title}} feels about <a href="{{high.url}}"><span itemscope itemtype="http://schema.org/Person"><span itemprop="name"><span itemprop="givenName">{{high.first_name | title}}</span><span itemprop="familyName"> {{high.last_name | title}}</span></span></span></a> who makes ${{high.salary | int | commas}} and <a href="{{low.url}}"><span itemscope itemtype="http://schema.org/Person"><span itemprop="name"><span itemprop="givenName">{{low.first_name | title}}</span> <span itemprop="familyName">{{low.last_name | title}}</span></span></span></a> who makes ${{low.salary | int | commas}}, yet both work in {{low.department | title}}.<p>
         </div>
     </div><!-- /row -->
 </div><!-- /starter-template -->        
