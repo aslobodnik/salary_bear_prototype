@@ -111,18 +111,16 @@ def generate_url(person_id):
 def find_others(person_id):
     person = df.iloc[person_id]
     coworkers = df[df.department == person.department]
-    coworkers = coworkers[coworkers.id != person_id]
     coworkers.sort('salary',inplace=True)
     highest_salary = coworkers.iloc[-1] 
     lowest_salary = coworkers.iloc[0] 
     
-    highest_salary_flg = False
-    lowest_salary_flg = True
-
     if highest_salary['salary'] == person['salary']:
-        highest_salary_flg = True
+        high_coworker = create_person(highest_salary)
+        low_coworker = create_person(lowest_salary)
     elif lowest_salary['salary']== person['salary']:
-        lowest_salary_flg = True
+        high_coworker = create_person(highest_salary)
+        low_coworker = create_person(lowest_salary)
     else:
         high_coworker = coworkers[coworkers['salary'] > person['salary']].sort('salary').iloc[0] 
         low_coworker = coworkers[coworkers['salary'] < person['salary']].sort('salary').iloc[-1] 

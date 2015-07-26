@@ -1,15 +1,32 @@
 {% extends "base.html" %}
-{% block head %}{{person.first_name | title}} {{person.middle_name | title}} {{person.last_name | title}}{% endblock %}
+{% block head %}{{person.first_name | title}} {{person.middle_name | title}} {{person.last_name | title}} | {{person.state}} | Salary ${{person.salary | int | commas}} | {{person.organization}}{% endblock %}
 {% block body %}
 <div class="starter-template">
-    <h1>{{person.first_name | title}} {{person.middle_name | title}} {{person.last_name | title}}</h1>
+    <h1>{{person.first_name | title}} {{person.middle_name | title}} {{person.last_name | title}} <br><small>Salary: ${{person.salary | int | commas}}</small></h1>
+    <h3 class="small">  </h3>
     <div class="row">
+    {% if low == person %}
+        <div class="col-md-6 col-md-offset-3">
+            <div itemscope itemtype="http://schema.org/Person">
+                <p class="lead" align="left">A long time ago <a href="{{person.url}}"><span itemprop="name"><span itemprop="givenName">{{person.first_name | title}}</span> <span itemprop="familyName">{{person.last_name | title}}</span></a> was born. When you ask? Well someone knows. But Salary Bear does not :-( What I do know is that {{person.first_name | title}} makes ${{person.salary | int | commas}}, resides in <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span itemprop="addressRegion">{{person.state}}</span></span> and works as <span itemprop="jobTitle">{{person.title }}</span>. Salary Bear isn't sure how long {{person.first_name | title}} has worked for <span itemprop="worksFor">{{person.organization}}</span>.</p></span>
+            </div>
+            <p class="lead" align="left"> Salary Bear wonders how {{person.first_name | title}} feels about <a href="{{high.url}}"><span itemscope itemtype="http://schema.org/Person"><span itemprop="name"><span itemprop="givenName">{{high.first_name | title}}</span><span itemprop="familyName"> {{high.last_name | title}}</span></span></span></a> who makes ${{high.salary | int | commas}}, which is more than anyone else in {{low.department | title}}.<p>
+        </div>
+    {% elif high == person %}
+        <div class="col-md-6 col-md-offset-3">
+            <div itemscope itemtype="http://schema.org/Person">
+                <p class="lead" align="left">A long time ago <a href="{{person.url}}"><span itemprop="name"><span itemprop="givenName">{{person.first_name | title}}</span> <span itemprop="familyName">{{person.last_name | title}}</span></a> was born. When you ask? Well someone knows. But Salary Bear does not :-( What I do know is that {{person.first_name | title}} makes ${{person.salary | int | commas}}, resides in <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span itemprop="addressRegion">{{person.state}}</span></span> and works as <span itemprop="jobTitle">{{person.title | title }}</span>. Salary Bear isn't sure how long {{person.first_name | title}} has worked for <span itemprop="worksFor">{{person.organization | title}}</span>.</p></span>
+            </div>
+            <p class="lead" align="left"> Salary Bear wonders how {{person.first_name | title}} feels about <a href="{{low.url}}"><span itemscope itemtype="http://schema.org/Person"><span itemprop="name"><span itemprop="givenName">{{low.first_name | title}}</span><span itemprop="familyName"> {{low.last_name | title}}</span></span></span></a> who makes ${{low.salary | int | commas}}, which is less than anyone else in {{low.department | title}}.<p>
+        </div>
+    {% else %} 
         <div class="col-md-6 col-md-offset-3">
             <div itemscope itemtype="http://schema.org/Person">
                 <p class="lead" align="left">A long time ago <a href="{{person.url}}"><span itemprop="name"><span itemprop="givenName">{{person.first_name | title}}</span> <span itemprop="familyName">{{person.last_name | title}}</span></a> was born. When you ask? Well someone knows. But Salary Bear does not :-( What I do know is that {{person.first_name | title}} makes ${{person.salary | int | commas}}, resides in <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span itemprop="addressRegion">{{person.state}}</span></span> and works as <span itemprop="jobTitle">{{person.title | title}}</span>. Salary Bear isn't sure how long {{person.first_name | title}} has worked for <span itemprop="worksFor">{{person.organization}}</span>.</p></span>
             </div>
             <p class="lead" align="left"> Salary Bear wonders how {{person.first_name | title}} feels about <a href="{{high.url}}"><span itemscope itemtype="http://schema.org/Person"><span itemprop="name"><span itemprop="givenName">{{high.first_name | title}}</span><span itemprop="familyName"> {{high.last_name | title}}</span></span></span></a> who makes ${{high.salary | int | commas}} and <a href="{{low.url}}"><span itemscope itemtype="http://schema.org/Person"><span itemprop="name"><span itemprop="givenName">{{low.first_name | title}}</span> <span itemprop="familyName">{{low.last_name | title}}</span></span></span></a> who makes ${{low.salary | int | commas}}, yet both work in {{low.department | title}}.<p>
         </div>
+    {% endif %}
     </div><!-- /row -->
 </div><!-- /starter-template -->        
 {% endblock %}        
