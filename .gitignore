@@ -2,10 +2,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+full_data.csv
 #OS
 .DS_Store
-
+#data file
+data/
 # C extensions
 *.so
 #Flask

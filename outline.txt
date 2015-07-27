@@ -7,13 +7,13 @@
     b. @app.route('/<state>/<organization>/<name>-<int:person_id>')[COMPLETE]
     c. has description of what they do plus the guy who he makes more of and the guy he makes less off [PUNTED to below]
 [Items Needed to Launch]
-1. schema.org
-2. proper grammar for description
+1. schema.org [COMPLETE]
+2. proper grammar for description [COMPLETE]
 3. pagination for results [COMPLETE]
 4. other people in one's deparment on profile page [COMPLETE]
-    a. handle special case of being lowest/highest salary
+    a. handle special case of being lowest/highest salary [COMPLETE]
 5. Remove top Nav and make colors better visible[COMPLETE]
 6. Test that it works with large file size
 7. Clean up salary to be rounded [COMPLETE]
 8. Clean up data to avoid all poeple with no salary
-9. Use branching to add features
+9. Use branching to add features [OVERKILL]

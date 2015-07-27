@@ -17,7 +17,7 @@ app.jinja_env.globals['url_for_other_page'] = url_for_other_page #pagination mac
 #Global Defaults
 PER_PAGE = 10
 
-df = pd.DataFrame.from_csv('data.csv')
+df = pd.DataFrame.from_csv('full_data_1.csv',index_col=False)
 df.columns = ['organization'
                 ,'department'
                 ,'last_name'
@@ -35,7 +35,7 @@ df['id'] = df.index
 #data cleaning
 #df = df[~df['title'].isnull()]
 df['salary'] = df['salary'].fillna('$0.00')
-df['salary'] = df['salary'].apply(lambda x: Decimal(sub(r'[^\d.]','',x)))
+#df['salary'] = df['salary'].apply(lambda x: Decimal(sub(r'[^\d.]','',x)))
 
 
 @app.template_filter('commas')
