@@ -25,7 +25,7 @@
                 <tbody>
                     {% for person in people %}
                         <tr>
-                            <td align="left"><a href="{{person.url}}">{{person.full_name | title}}</a></td>
+                            <td align="left"><a href="{{person.url}}"><span itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{person.full_name | title}}</span></span></a></td>
                             <td align="left">{{person.title | string | title}}</td>
                             <td align="left">${{person.salary | int | commas}}</td>
                         </tr> 
