@@ -11,5 +11,28 @@
         <img src="{{ url_for('static', filename='img/pooh.png') }}">
         </div>
     </div><!-- /row -->
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3>Top 5 Salaries</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Job Title</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for person in people %}
+                        <tr>
+                            <td align="left"><a href="{{person.url}}">{{person.full_name | title}}</a></td>
+                            <td align="left">{{person.title | string | title}}</td>
+                            <td align="left">${{person.salary | int | commas}}</td>
+                        </tr> 
+                    {% endfor %}                
+                </tbody>
+            </table>
+        </div>
+    </div><!-- /row -->
 </div><!-- /starter-template -->        
 {% endblock %}        

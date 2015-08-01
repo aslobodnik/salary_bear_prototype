@@ -17,7 +17,7 @@ app.jinja_env.globals['url_for_other_page'] = url_for_other_page #pagination mac
 #Global Defaults
 PER_PAGE = 10
 
-df = pd.DataFrame.from_csv('full_data_1.csv',index_col=False)
+df = pd.DataFrame.from_csv('data/full_data.csv',index_col=False)
 df.columns = ['organization'
                 ,'department'
                 ,'last_name'
@@ -27,6 +27,9 @@ df.columns = ['organization'
                 ,'salary'
                 ,'state']
 
+
+df.middle_name.fillna('',inplace=True)
+df.last_name.fillna('',inplace=True)
 df['full_name'] = df['first_name'] + ' ' + df['middle_name'] + ' '\
                     + df['last_name']
 
@@ -66,8 +69,8 @@ def create_people(df):
 
 @app.route("/")
 def home():
-    person = df.iloc[0]
-    return render_template('home.html', person=person)
+    people = create_people(df.sort('salary').iloc[-5:])
+    return render_template('home.html', people=people)
 
 @app.route('/<state>/<organization>/<name>-<int:person_id>')
 def profile(state,organization,name,person_id):

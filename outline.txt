@@ -13,7 +13,9 @@
 4. other people in one's deparment on profile page [COMPLETE]
     a. handle special case of being lowest/highest salary [COMPLETE]
 5. Remove top Nav and make colors better visible[COMPLETE]
-6. Test that it works with large file size
+6. Test that it works with large file size [COMPLETE]
 7. Clean up salary to be rounded [COMPLETE]
-8. Clean up data to avoid all poeple with no salary
+8. Clean up data to avoid all poeple with no salary [COMPLETE]
 9. Use branching to add features [OVERKILL]
+10. Clean up structure [OVERKILL]
+11. add top five to homepage to improve discoverablitity [COMPLETE]
